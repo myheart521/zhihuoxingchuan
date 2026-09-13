@@ -8,7 +8,7 @@
 
 [![虚拟展厅演示](docs/images/red-culture-gallery-demo.jpg)](https://github.com/myheart521/zhihuoxingchuan/releases/download/v1.0.0-source/red-culture-gallery-demo.mp4)
 
-[项目与 PPT 材料整理](docs/PROJECT.md) · [获奖记录](docs/AWARDS.md) · [下载演示视频](https://github.com/myheart521/zhihuoxingchuan/releases/download/v1.0.0-source/red-culture-gallery-demo.mp4)
+[项目功能说明](docs/PROJECT.md) · [获奖记录](docs/AWARDS.md) · [下载演示视频](https://github.com/myheart521/zhihuoxingchuan/releases/download/v1.0.0-source/red-culture-gallery-demo.mp4)
 
 ## 获奖记录
 
@@ -21,6 +21,28 @@
 | 2025 | 第二十七届中国机器人及人工智能大赛 · 新质生产力创新设计专项赛 | 省级层次选拔赛 | 优秀奖 |
 
 公开记录不列参赛作品题名、团队名单和证书编号，原始证书也不上传。各条记录的赛段说明见 [AWARDS.md](docs/AWARDS.md)。
+
+## 界面截图
+
+从本地保存的功能截图中补充了首页、角色对话、写作、思维导图、自测、投稿和后台管理等页面。[完整图集](docs/SCREENSHOTS.md)共 32 张图片，可以按功能查看大图。
+
+| 首页与主题学习入口 | 主题内容筛选与文章浏览 |
+| :---: | :---: |
+| [<img src="docs/images/culture-home.png" width="480" alt="首页与主题学习入口">](docs/images/culture-home.png) | [<img src="docs/images/culture-content-library.png" width="480" alt="主题内容筛选与文章浏览">](docs/images/culture-content-library.png) |
+
+| 历史人物角色库与角色选择 | 历史人物角色对话界面 |
+| :---: | :---: |
+| [<img src="docs/images/culture-role-library.png" width="480" alt="历史人物角色库与角色选择">](docs/images/culture-role-library.png) | [<img src="docs/images/culture-role-chat.png" width="480" alt="历史人物角色对话界面">](docs/images/culture-role-chat.png) |
+
+| 知识主题思维导图 | 红色知识自测题库 |
+| :---: | :---: |
+| [<img src="docs/images/culture-mindmap.png" width="480" alt="知识主题思维导图">](docs/images/culture-mindmap.png) | [<img src="docs/images/culture-quiz-library.png" width="480" alt="红色知识自测题库">](docs/images/culture-quiz-library.png) |
+
+| 文章投稿、分类标签与可见性设置 | 展厅入口与场景导航 |
+| :---: | :---: |
+| [<img src="docs/images/culture-post-editor.png" width="480" alt="文章投稿、分类标签与可见性设置">](docs/images/culture-post-editor.png) | [<img src="docs/images/culture-gallery-entrance.png" width="480" alt="展厅入口与场景导航">](docs/images/culture-gallery-entrance.png) |
+
+截图展示的是历史版本。账号、密钥和业务记录已遮盖；模型与外部展厅需要自行配置。
 
 ## 功能与实现范围
 
