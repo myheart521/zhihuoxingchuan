@@ -16,4 +16,4 @@
 
 ## 资料范围
 
-此文档依据项目说明、源码与比赛材料整理。原始材料中的团队资料、个人联系方式、账号、服务器地址及未经验证的宣传指标未直接搬入 README。获奖名称和级别见 [AWARDS.md](AWARDS.md)，运行条件见 [CONFIGURATION.md](CONFIGURATION.md)。
+此文档依据项目说明、源码与比赛材料整理。原始材料中的团队资料、个人联系方式、账号、服务器地址及未经验证的宣传指标未直接搬入 README。获奖记录见 [AWARDS.md](AWARDS.md)，运行条件见 [CONFIGURATION.md](CONFIGURATION.md)。

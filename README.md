@@ -4,16 +4,23 @@
 
 本仓库提供整理后的源代码、空库表结构和配置说明。历史服务地址、真实业务记录、个人资料、密钥和未经核实授权的展示媒体不随代码发布。公开版界面的部分图片使用中性占位图。
 
-## 演示与获奖
-
-历史参赛材料还使用“星火智传”和“AI赋能·特别能战斗精神互动教育”等名称。
+## 演示
 
 [![虚拟展厅演示](docs/images/red-culture-gallery-demo.jpg)](https://github.com/myheart521/zhihuoxingchuan/releases/download/v1.0.0-source/red-culture-gallery-demo.mp4)
 
-- **2025 第二十七届中国机器人及人工智能大赛全国总决赛·智能文化创意创新赛：一等奖。**
-- **2025 第十八届中国大学生计算机设计大赛河南省级赛：三等奖。**
+[项目与 PPT 材料整理](docs/PROJECT.md) · [获奖记录](docs/AWARDS.md) · [下载演示视频](https://github.com/myheart521/zhihuoxingchuan/releases/download/v1.0.0-source/red-culture-gallery-demo.mp4)
 
-[项目与 PPT 材料整理](docs/PROJECT.md) · [获奖对应依据](docs/AWARDS.md) · [下载演示视频](https://github.com/myheart521/zhihuoxingchuan/releases/download/v1.0.0-source/red-culture-gallery-demo.mp4)
+## 获奖记录
+
+以下是项目历次参赛中已核实的获奖记录，年份、赛段和等级按保存的证书及参赛材料整理。
+
+| 年份 | 赛事与赛道 | 赛段 / 赛区 | 奖项 |
+| --- | --- | --- | --- |
+| 2025 | 第二十七届中国机器人及人工智能大赛 · 智能文化创意创新赛 | 全国总决赛 | 一等奖 |
+| 2025 | 第十八届中国大学生计算机设计大赛 · 微课与 AI 辅助教学 | 河南省级赛 | 三等奖 |
+| 2025 | 第二十七届中国机器人及人工智能大赛 · 新质生产力创新设计专项赛 | 省级层次选拔赛 | 优秀奖 |
+
+公开记录不列参赛作品题名、团队名单和证书编号，原始证书也不上传。各条记录的赛段说明见 [AWARDS.md](docs/AWARDS.md)。
 
 ## 功能与实现范围
 
