@@ -1,0 +1,39 @@
+# Supply credentials through the server process environment.
+server:
+  port: ${SERVER_PORT:48080}
+spring:
+  datasource:
+    dynamic:
+      primary: master
+      datasource:
+        master:
+          name: ${DB_NAME:zhihuoxingchuan}
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: ${DB_URL:jdbc:mysql://127.0.0.1:3306/zhihuoxingchuan?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai}
+          username: ${DB_USER}
+          password: ${DB_PASSWORD}
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      database: ${REDIS_DATABASE:0}
+      password: ${REDIS_PASSWORD:}
+  boot:
+    admin:
+      client:
+        enabled: false
+  quartz:
+    auto-startup: false
+project:
+  security:
+    mock-enable: false
+  tenant:
+    enable: false
+  access-log:
+    enable: false
+  error-code:
+    enable: false
+  demo: false
+logging:
+  file:
+    name: ${LOG_FILE:./logs/application.log}

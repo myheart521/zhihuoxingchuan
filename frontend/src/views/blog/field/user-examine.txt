@@ -1,0 +1,89 @@
+用户审核页面接口文档
+
+1. 获取待审核用户列表
+GET /api/user/examine/list
+请求参数：
+{
+  pageNum: number;       // 当前页码
+  pageSize: number;      // 每页条数
+  keyword?: string;      // 搜索关键词（用户名/真实姓名）
+  auditStatus?: number;  // 审核状态：0-未审核 1-审核中 2-审核通过 3-拒绝
+  startTime?: string;    // 创建时间范围-开始
+  endTime?: string;      // 创建时间范围-结束
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    total: number;      // 总记录数
+    list: Array<{
+      id: number;           // 用户ID
+      username: string;     // 用户名
+      email: string;       // 邮箱
+      role: number;        // 角色
+      realName: string;    // 真实姓名
+      idCardFront: string; // 身份证正面图片
+      idCardBack: string;  // 身份证背面图片
+      auditStatus: number; // 审核状态
+      auditComment: string;// 审核备注
+      createTime: string;  // 创建时间
+      reputation: number;  // 信誉等级
+      blogCount: number;   // 博客数量
+      likeCount: number;   // 获赞数
+      isLocked: number;    // 是否禁用
+    }>;
+  };
+}
+
+2. 审核用户
+PUT /api/user/examine/{userId}
+请求参数：
+{
+  auditStatus: number;   // 审核状态：2-通过 3-拒绝
+  auditComment: string;  // 审核意见（拒绝时必填）
+  role?: number;         // 指定用户角色（通过时可选）：1-普通用户 2-管理员
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+3. 禁用/启用用户
+PUT /api/user/lock/{userId}
+请求参数：
+{
+  isLocked: number;  // 0-启用 1-禁用
+  reason: string;    // 操作原因（禁用时必填）
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+4. 获取用户详细信息
+GET /api/user/detail/{userId}
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    id: number;
+    username: string;
+    email: string;
+    role: number;
+    realName: string;
+    idCardFront: string;
+    idCardBack: string;
+    auditStatus: number;
+    auditComment: string;
+    createTime: string;
+    reputation: number;
+    blogCount: number;
+    likeCount: number;
+    isLocked: number;
+    inviteCode: string;
+  }
+} 

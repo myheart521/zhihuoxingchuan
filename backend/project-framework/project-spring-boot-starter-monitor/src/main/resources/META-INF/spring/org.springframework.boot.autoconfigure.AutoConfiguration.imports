@@ -1,0 +1,2 @@
+com.example.project.framework.tracer.config.ProjectTracerAutoConfiguration
+com.example.project.framework.tracer.config.ProjectMetricsAutoConfiguration

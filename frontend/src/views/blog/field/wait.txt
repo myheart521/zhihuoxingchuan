@@ -1,0 +1,69 @@
+待审核博客接口文档
+
+1. 获取待审核博客列表
+URL: /api/blog/audit/page
+Method: GET
+请求参数：
+{
+  "pageNum": number,       // 页码，从1开始
+  "pageSize": number,      // 每页条数
+  "keyword": string,       // 可选，搜索关键词（标题）
+  "startTime": string,     // 可选，开始时间，格式：YYYY-MM-DD HH:mm:ss
+  "endTime": string       // 可选，结束时间，格式：YYYY-MM-DD HH:mm:ss
+}
+响应结果：
+{
+  "code": 200,
+  "msg": "success",
+  "data": {
+    "total": number,      // 总记录数
+    "list": [
+      {
+        "id": number,           // 博客ID
+        "userId": number,       // 作者ID
+        "title": string,        // 标题
+        "content": string,      // 内容
+        "summary": string,      // 摘要
+        "frontCover": string,   // 封面图片URL
+        "status": number,       // 状态：1-待审核
+        "isTop": number,        // 是否置顶：0-否 1-是
+        "visibility": number,   // 可见性：0-公开 1-仅自己 2-粉丝可见
+        "viewCount": number,    // 阅读量
+        "likeCount": number,    // 点赞数
+        "createTime": string,   // 创建时间
+        "updateTime": string,   // 更新时间
+        "author": {            // 作者信息
+          "id": number,
+          "username": string,
+          "role": number
+        },
+        "category": {          // 分类信息
+          "id": number,
+          "name": string
+        },
+        "tags": [              // 标签列表
+          {
+            "id": number,
+            "name": string
+          }
+        ]
+      }
+    ]
+  }
+}
+
+2. 审核博客
+URL: /api/blog/audit/review
+Method: POST
+请求参数：
+{
+  "id": number,              // 博客ID
+  "status": number,          // 审核结果：2-通过 3-拒绝
+  "auditComment": string     // 审核意见，拒绝时必填
+}
+响应结果：
+{
+  "code": 200,
+  "msg": "审核成功",
+  "data": null
+} 

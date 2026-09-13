@@ -1,0 +1,27 @@
+# Local credentials and generated outputs
+.env
+.env.*
+!.env.example
+**/.env.example
+!**/.env.example
+node_modules/
+target/
+dist/
+logs/
+*.log
+.idea/
+.vscode/
+.DS_Store
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.dump
+*.bak
+*.zip
+*.rar
+*.7z
+uploads/
+.flattened-pom.xml

@@ -1,0 +1,104 @@
+--HTML
+<button class="iridiscent">iridescent button</button>
+
+--CSS
+$purple: #799df1;
+$light-blue: #60c1ec;
+$green: #7bd9de;
+$pink: #cfb0d2;
+
+$grey: #c7c8c9;
+
+$shine: #f7f7f6;
+$black: #000;
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  background-color: #43464b;
+  overflow: hidden;
+}
+
+.iridiscent {
+  position: relative;
+  z-index: 0;
+  padding: 1rem 3rem;
+  border: 1px solid $purple;
+  border-radius: 9999px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: $black;
+  box-shadow: inset 0 0 1rem 0 $shine;
+  cursor: pointer;
+  overflow: hidden;
+  transition: box-shadow 0.5s ease;
+  background: linear-gradient(
+    60deg,
+    $purple 5%,
+    $light-blue 15%,
+    $green 25%,
+    $pink 35%,
+    $purple 45%,
+    $light-blue 55%,
+    $green 65%,
+    $pink 75%,
+    $purple 85%,
+    $light-blue 95%,
+    $green
+  );
+  background-size: 200% 200%;
+  background-position: -100% -100%;
+  @keyframes moving1 {
+    20% {
+      background-position: -130% -120%;
+    }
+    40% {
+      background-position: -140% -100%;
+    }
+    70% {
+      background-position: -110% -130%;
+    }
+  }
+  animation: moving1;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: calc(100% - 0.4rem);
+    height: calc(100% - 0.4rem);
+    border-radius: 9999px;
+    border-top: 1px solid rgba($shine, 0.5);
+    border-right: 1px solid rgba($shine, 0.5);
+    box-shadow: 0 0 1rem 1rem rgba($grey, 0.4);
+    background: linear-gradient(180deg, transparent, $grey 160%);
+    overflow: hidden;
+  }
+  &:after {
+    content: "";
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    background: linear-gradient(
+      150deg,
+      $shine,
+      transparent 20%,
+      transparent 60%,
+      $shine 75%,
+      $shine
+    );
+  }
+  &:hover {
+    box-shadow: inset 0 0 1rem 0 $shine, 0 0 1rem 0 $shine;
+  }
+  @media screen and (max-width: 450px) {
+    font-size: 1rem;
+  }
+}

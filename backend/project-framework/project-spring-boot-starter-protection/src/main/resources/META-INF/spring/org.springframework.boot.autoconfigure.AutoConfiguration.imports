@@ -1,0 +1,4 @@
+com.example.project.framework.idempotent.config.ProjectIdempotentConfiguration
+com.example.project.framework.lock4j.config.ProjectLock4jConfiguration
+com.example.project.framework.ratelimiter.config.ProjectRateLimiterConfiguration
+com.example.project.framework.signature.config.ProjectApiSignatureAutoConfiguration

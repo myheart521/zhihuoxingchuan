@@ -1,0 +1,95 @@
+举报处理页面接口文档
+
+1. 获取举报列表
+GET /api/blog/accuse/list
+请求参数：
+{
+  pageNum: number;       // 当前页码
+  pageSize: number;      // 每页条数
+  keyword?: string;      // 搜索关键词（标题/内容）
+  status?: number;       // 处理状态：0-待处理 1-处理中 2-已处理 3-已驳回
+  type?: number;         // 举报类型：1-垃圾广告 2-涉黄涉政 3-抄袭侵权 4-其他
+  startTime?: string;    // 举报时间范围-开始
+  endTime?: string;      // 举报时间范围-结束
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    total: number;      // 总记录数
+    list: Array<{
+      id: number;           // 举报ID
+      postId: number;       // 被举报博客ID
+      postTitle: string;    // 被举报博客标题
+      postContent: string;  // 被举报博客内容（截取）
+      authorId: number;     // 博主ID
+      authorName: string;   // 博主用户名
+      accuserId: number;    // 举报人ID
+      accuserName: string;  // 举报人用户名
+      type: number;         // 举报类型
+      reason: string;       // 举报原因
+      evidence: string[];   // 证据图片
+      status: number;       // 处理状态
+      handleUserId: number; // 处理人ID
+      handleUserName: string;// 处理人用户名
+      handleResult: string; // 处理结果
+      handleTime: string;   // 处理时间
+      createTime: string;   // 举报时间
+    }>;
+  };
+}
+
+2. 处理举报
+PUT /api/blog/accuse/{id}/handle
+请求参数：
+{
+  status: number;      // 处理状态：2-已处理 3-已驳回
+  handleResult: string;// 处理结果说明
+  blogStatus?: number; // 博客处理：0-不处理 1-下架 2-删除
+  punishType?: number; // 处罚类型：0-不处罚 1-禁言 2-禁止发博客 3-封号
+  punishDays?: number; // 处罚天数（0表示永久）
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+3. 获取举报详情
+GET /api/blog/accuse/{id}/detail
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    id: number;
+    postId: number;
+    postTitle: string;
+    postContent: string;
+    authorId: number;
+    authorName: string;
+    accuserId: number;
+    accuserName: string;
+    type: number;
+    reason: string;
+    evidence: string[];
+    status: number;
+    handleUserId: number;
+    handleUserName: string;
+    handleResult: string;
+    handleTime: string;
+    createTime: string;
+    // 附加信息
+    authorInfo: {
+      reputation: number;    // 作者信誉分
+      accuseCount: number;   // 被举报次数
+      punishCount: number;   // 被处罚次数
+    };
+    accuserInfo: {
+      reputation: number;    // 举报人信誉分
+      accuseCount: number;   // 举报次数
+      validCount: number;    // 有效举报次数
+    };
+  }
+} 

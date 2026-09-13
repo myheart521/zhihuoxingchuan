@@ -1,0 +1,2 @@
+com.example.project.framework.redis.config.ProjectRedisAutoConfiguration
+com.example.project.framework.redis.config.ProjectCacheAutoConfiguration

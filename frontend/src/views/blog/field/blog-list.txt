@@ -1,0 +1,114 @@
+博客列表页面接口文档
+
+1. 获取博客列表
+GET /api/blog/list
+请求参数：
+{
+  pageNum: number;       // 当前页码
+  pageSize: number;      // 每页条数
+  keyword?: string;      // 搜索关键词（标题）
+  categoryId?: number;   // 分类ID
+  tagId?: number;        // 标签ID
+  status?: number;       // 状态：0-草稿 1-待审核 2-已发布 3-下架
+  userId?: number;       // 作者ID
+  isTop?: number;        // 是否置顶：0-否 1-是
+  visibility?: number;   // 可见性：0-公开 1-仅自己 2-粉丝可见
+  startTime?: string;    // 创建时间范围-开始
+  endTime?: string;      // 创建时间范围-结束
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    total: number;      // 总记录数
+    list: Array<{
+      id: number;       // 博客ID
+      title: string;    // 标题
+      content: string;  // 内容（可能需要截取）
+      summary: string;  //摘要
+      frontCover: string; // 封面图
+      status: number;   // 状态
+      isTop: number;    // 是否置顶
+      topTime: string;  // 置顶时间
+      visibility: number; // 可见性
+      viewCount: number;  // 阅读量
+      likeCount: number;  // 点赞数
+      createTime: string; // 创建时间
+      updateTime: string; // 更新时间
+      author: {          // 作者信息
+        id: number;
+        username: string;
+        role: number;
+      };
+      category: {        // 分类信息
+        id: number;
+        name: string;
+      };
+      tags: Array<{     // 标签信息
+        id: number;
+        name: string;
+      }>;
+    }>;
+  };
+}
+
+2. 删除博客
+DELETE /api/blog/{id}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+3. 置顶/取消置顶博客（管理员）
+PUT /api/blog/{id}/top
+请求参数：
+{
+  isTop: number;  // 0-取消置顶 1-置顶
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+4. 修改博客可见性
+PUT /api/blog/{id}/visibility
+请求参数：
+{
+  visibility: number;  // 0-公开 1-仅自己 2-粉丝可见
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+5. 获取博客分类列表（树形）
+GET /api/blog/category/tree
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: Array<{
+    id: number;
+    name: string;
+    children?: Array<{
+      id: number;
+      name: string;
+    }>;
+  }>;
+}
+
+6. 获取博客标签列表
+GET /api/blog/tag/list
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: Array<{
+    id: number;
+    name: string;
+  }>;
+} 

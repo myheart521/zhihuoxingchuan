@@ -1,0 +1,7 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Stable Diffusion sampler names (not credentials)"
+regexTarget = "secret"
+regexes = ['''^K_DPMPP_2S_ANCESTRAL$''', '''^K_DPM_2_ANCESTRAL$''']

@@ -1,0 +1,192 @@
+博客首页接口文档
+
+1. 获取轮播图列表
+GET /api/blog/carousel/list
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: Array<{
+    id: number;           // 轮播图ID
+    image: string;        // 图片URL
+    title: string;        // 标题
+    description: string;  // 描述
+    link: string;         // 链接地址
+    sort: number;         // 排序号
+    status: number;       // 状态：0-禁用 1-启用
+    createTime: string;   // 创建时间
+  }>;
+}
+
+2. 获取博客列表（瀑布流）
+GET /api/blog/list
+请求参数：
+{
+  pageNo: number;        // 当前页码
+  pageSize: number;      // 每页条数
+  title?: string;        // 标题关键词
+  categoryId?: number;   // 分类ID
+  tagId?: number;        // 标签ID
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    total: number;      // 总记录数
+    list: Array<{
+      id: number;           // 博客ID
+      userId: number;       // 作者ID
+      author: string;       // 作者名称
+      title: string;        // 标题
+      summary: string;      // 摘要
+      frontCover: string;   // 封面图片
+      status: number;       // 状态
+      isTop: number;        // 是否置顶
+      topTime: string;      // 置顶时间
+      visibility: number;   // 可见性
+      viewCount: number;    // 阅读量
+      likeCount: number;    // 点赞数
+      createTime: string;   // 创建时间
+      updateTime: string;   // 更新时间
+      category: {           // 分类信息
+        id: number;
+        name: string;
+      };
+      tags: Array<{         // 标签列表
+        id: number;
+        name: string;
+      }>;
+    }>;
+  };
+}
+
+3. 获取分类列表
+GET /api/blog/category/list
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: Array<{
+    id: number;           // 分类ID
+    name: string;         // 分类名称
+    parentId: number;     // 父分类ID
+  }>;
+}
+
+4. 获取标签列表
+GET /api/blog/tag/list
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: Array<{
+    id: number;           // 标签ID
+    name: string;         // 标签名称
+  }>;
+}
+
+5. 获取用户信息
+GET /api/user/info
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    id: number;           // 用户ID
+    username: string;     // 用户名
+    email: string;        // 邮箱
+    role: number;         // 角色
+    isLocked: number;     // 是否禁用
+    reputation: number;   // 信誉等级
+    blogCount: number;    // 博客数量
+    likeCount: number;    // 获赞数量
+    realName: string;     // 真实姓名
+    avatar: string;       // 头像URL
+    createTime: string;   // 创建时间
+  };
+}
+
+6. 获取网站公告
+GET /api/site/notice/list
+请求参数：
+{
+  limit?: number;        // 获取条数，默认5条
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: Array<{
+    id: number;           // 公告ID
+    content: string;      // 公告内容
+    createTime: string;   // 创建时间
+    priority: number;     // 优先级
+  }>;
+}
+
+7. 获取每日鸡汤
+GET /api/site/quote/random
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: string;          // 随机鸡汤内容
+}
+
+8. 获取网站统计信息
+GET /api/site/stats
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    totalVisits: number;  // 总访问量
+    totalPosts: number;   // 文章总数
+    totalUsers: number;   // 用户总数
+    runningDays: number;  // 运行天数
+  };
+}
+
+9. 博客阅读接口
+GET /api/blog/detail/{id}
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    id: number;           // 博客ID
+    userId: number;       // 作者ID
+    author: string;       // 作者名称
+    title: string;        // 标题
+    content: string;      // 内容（HTML格式）
+    status: number;       // 状态
+    isTop: number;        // 是否置顶
+    visibility: number;   // 可见性
+    viewCount: number;    // 阅读量
+    likeCount: number;    // 点赞数
+    createTime: string;   // 创建时间
+    updateTime: string;   // 更新时间
+    category: {           // 分类信息
+      id: number;
+      name: string;
+    };
+    tags: Array<{         // 标签列表
+      id: number;
+      name: string;
+    }>;
+    // 作者信息
+    authorInfo: {
+      avatar: string;     // 头像
+      role: number;       // 角色
+      blogCount: number;  // 博客数
+      likeCount: number;  // 获赞数
+    };
+    // 相关推荐
+    relatedPosts: Array<{
+      id: number;
+      title: string;
+      viewCount: number;
+    }>;
+  };
+} 

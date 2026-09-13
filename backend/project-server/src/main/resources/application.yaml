@@ -1,0 +1,319 @@
+spring:
+  application:
+    name: project-server
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+  main:
+    allow-circular-references: true
+  servlet:
+    multipart:
+      max-file-size: 16MB
+      max-request-size: 32MB
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+      write-date-timestamps-as-nanoseconds: false
+      write-durations-as-timestamps: true
+      fail-on-empty-beans: false
+  cache:
+    type: REDIS
+    redis:
+      time-to-live: 1h
+    caffeine:
+      spec: maximumSize=1000, expireAfterWrite=10m
+server:
+  servlet:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+---
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui
+  default-flat-param-object: true
+knife4j:
+  enable: false
+  setting:
+    language: zh_cn
+flowable:
+  database-schema-update: false
+  db-history-used: true
+  check-process-definitions: false
+  history-level: audit
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: NONE
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+    banner: false
+  type-aliases-package: ${project.info.base-package}.module.*.dal.dataobject
+  encryptor:
+    password: ''
+mybatis-plus-join:
+  banner: false
+  sub-table-logic: true
+  ms-cache: true
+  table-alias: t
+  logic-del-type: true
+spring:
+  data:
+    redis:
+      repositories:
+        enabled: false
+easy-trans:
+  is-enable-global: true
+---
+aj:
+  captcha:
+    jigsaw: classpath:images/jigsaw
+    pic-click: classpath:images/pic-click
+    cache-type: redis
+    cache-number: 1000
+    timing-clear: 180
+    type: blockPuzzle
+    water-mark: 芋道源码
+    interference-options: 0
+    req-frequency-limit-enable: false
+    req-get-lock-limit: 5
+    req-get-lock-seconds: 10
+    req-get-minute-limit: 30
+    req-check-minute-limit: 60
+    req-verify-minute-limit: 60
+---
+rocketmq:
+  producer:
+    group: ${spring.application.name}_PRODUCER
+spring:
+  kafka:
+    producer:
+      acks: 1
+      retries: 3
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+    listener:
+      missing-topics-fatal: false
+---
+spring:
+  ai:
+    vectorstore:
+      redis:
+        initialize-schema: false
+        index: knowledge_index
+        prefix: 'knowledge_segment:'
+      qdrant:
+        initialize-schema: false
+        collection-name: knowledge_segment
+        host: 127.0.0.1
+        port: 6334
+      milvus:
+        initialize-schema: false
+        database-name: default
+        collection-name: knowledge_segment
+        client:
+          host: 127.0.0.1
+          port: 19530
+    qianfan:
+      api-key: ''
+      secret-key: ''
+    zhipuai:
+      api-key: ''
+    openai:
+      api-key: ''
+      base-url: https://example.invalid/resource
+    azure:
+      openai:
+        endpoint: https://example.invalid/resource
+        api-key: ''
+    ollama:
+      base-url: http://127.0.0.1:11434
+      chat:
+        model: llama3
+    stabilityai:
+      api-key: ''
+    dashscope:
+      api-key: ''
+    minimax:
+      api-key: ''
+    moonshot:
+      api-key: ''
+project:
+  ai:
+    deep-seek:
+      enable: false
+      api-key: ''
+      model: deepseek-chat
+    doubao:
+      enable: false
+      api-key: ''
+      model: doubao-1-5-lite-32k-250115
+    hunyuan:
+      enable: false
+      api-key: ''
+      model: hunyuan-turbo
+    siliconflow:
+      enable: false
+      api-key: ''
+      model: deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+    xinghuo:
+      enable: false
+      appKey: ''
+      secretKey: ''
+      model: generalv3.5
+    baichuan:
+      enable: false
+      api-key: ''
+      model: Baichuan4-Turbo
+    midjourney:
+      enable: false
+      base-url: https://example.invalid/resource
+      api-key: ''
+      notify-url: https://example.invalid/resource
+    suno:
+      enable: false
+      base-url: http://127.0.0.1:3001
+    aigcuniversity:
+      enabled: true
+      api-key: ''
+      model-id: 836755
+---
+project:
+  info:
+    version: 1.0.0
+    base-package: com.example.project
+  web:
+    admin-ui:
+      url: https://example.invalid/resource
+  xss:
+    enable: false
+    exclude-urls:
+    - ${spring.boot.admin.context-path}/**
+    - ${management.endpoints.web.base-path}/**
+  security:
+    permit-all_urls:
+    - /admin-api/mp/open/**
+    - /admin-api/blog/carousel/list
+    - /admin-api/blog/blog/index/page
+    - /admin-api/blog/blog/detail/**
+    - /admin-api/blog/category/list
+    - /admin-api/blog/tag/list
+    - /admin-api/blog/comment/page
+    - /admin-api/blog/comment-reply/page
+    - /admin-api/system/notify-message/get-unread-count
+    - /admin-api/system/dict-data/simple-list
+    - /admin-api/report/go-view/data/blog-view-rank
+    - /admin-api/report/go-view/data/blog-like-rank
+    - /admin-api/report/go-view/blog-category-radar
+    - /admin-api/report/go-view/blog-list-table
+    - /admin-api/report/go-view/blog-tag-cloud
+  websocket:
+    enable: false
+    path: /infra/ws
+    sender-type: local
+    sender-rocketmq:
+      topic: ${spring.application.name}-websocket
+      consumer-group: ${spring.application.name}-websocket-consumer
+    sender-rabbitmq:
+      exchange: ${spring.application.name}-websocket-exchange
+      queue: ${spring.application.name}-websocket-queue
+    sender-kafka:
+      topic: ${spring.application.name}-websocket
+      consumer-group: ${spring.application.name}-websocket-consumer
+  swagger:
+    title: 芋道快速开发平台
+    description: 提供管理后台、用户 App 的所有功能
+    version: ${project.info.version}
+    url: ${project.web.admin-ui.url}
+    email: maintainer@example.invalid
+    license: MIT
+    license-url: https://gitee.com/zhijiantianya/ruoyi-vue-pro/blob/master/LICENSE
+  codegen:
+    base-package: ${project.info.base-package}
+    db-schemas: ${spring.datasource.dynamic.datasource.master.name}
+    front-type: 20
+    unit-test-enable: false
+  tenant:
+    enable: false
+    ignore-urls:
+    - /admin-api/system/tenant/get-id-by-name
+    - /admin-api/system/tenant/get-by-website
+    - /admin-api/system/tenant/simple-list
+    - /admin-api/system/captcha/get
+    - /admin-api/system/captcha/check
+    - /admin-api/infra/file/*/get/**
+    - /admin-api/system/sms/callback/*
+    - /admin-api/pay/notify/**
+    - /jmreport/*
+    - /admin-api/mp/open/**
+    ignore-tables:
+    - system_tenant
+    - system_tenant_package
+    - system_dict_data
+    - system_dict_type
+    - system_error_code
+    - system_menu
+    - system_sms_channel
+    - system_sms_template
+    - system_sms_log
+    - system_sensitive_word
+    - system_oauth2_client
+    - system_mail_account
+    - system_mail_template
+    - system_mail_log
+    - system_notify_template
+    - infra_codegen_column
+    - infra_codegen_table
+    - infra_config
+    - infra_file_config
+    - infra_file
+    - infra_file_content
+    - infra_job
+    - infra_job_log
+    - infra_job_log
+    - iot_plugin_info
+    - iot_plugin_instance
+    - infra_data_source_config
+    - jimu_dict
+    - jimu_dict_item
+    - jimu_report
+    - jimu_report_data_source
+    - jimu_report_db
+    - jimu_report_db_field
+    - jimu_report_db_param
+    - jimu_report_link
+    - jimu_report_map
+    - jimu_report_share
+    - rep_demo_dxtj
+    - rep_demo_employee
+    - rep_demo_gongsi
+    - rep_demo_jianpiao
+    - tmp_report_data_1
+    - tmp_report_data_income
+    ignore-caches:
+    - user_role_ids
+    - permission_menu_ids
+    - oauth_client
+    - notify_template
+    - mail_account
+    - mail_template
+    - sms_template
+    - iot:device
+    - iot:thing_model_list
+  sms-code:
+    expire-times: 10m
+    send-frequency: 1m
+    send-maximum-quantity-per-day: 10
+    begin-code: 9999
+    end-code: 9999
+debug: false

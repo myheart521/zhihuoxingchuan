@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.project.module.blog.dal.mysql.systemusers.SystemUsersMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.project.module.blog.dal.dataobject.systemusers.SystemUsers">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="deptId" column="dept_id" jdbcType="BIGINT"/>
+        <result property="postIds" column="post_ids" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="mobile" column="mobile" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="TINYINT"/>
+        <result property="avatar" column="avatar" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="loginIp" column="login_ip" jdbcType="VARCHAR"/>
+        <result property="loginDate" column="login_date" jdbcType="TIMESTAMP"/>
+        <result property="creator" column="creator" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updater" column="updater" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleted" column="deleted" jdbcType="BIT"/>
+        <result property="tenantId" column="tenant_id" jdbcType="BIGINT"/>
+        <result property="reputation" column="reputation" jdbcType="INTEGER"/>
+        <result property="blogCount" column="blog_count" jdbcType="INTEGER"/>
+        <result property="likeCount" column="like_count" jdbcType="BIGINT"/>
+        <result property="inviteCode" column="invite_code" jdbcType="VARCHAR"/>
+        <result property="realName" column="real_name" jdbcType="VARCHAR"/>
+        <result property="auditStatus" column="audit_status" jdbcType="TINYINT"/>
+        <result property="idCardFront" column="id_card_front" jdbcType="VARCHAR"/>
+        <result property="idCardBack" column="id_card_back" jdbcType="VARCHAR"/>
+        <result property="auditComment" column="audit_comment" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,username,password,
+        nickname,remark,dept_id,
+        post_ids,email,mobile,
+        sex,avatar,status,
+        login_ip,login_date,creator,
+        create_time,updater,update_time,
+        deleted,tenant_id,reputation,
+        blog_count,like_count,invite_code,
+        real_name,audit_status,id_card_front,
+        id_card_back,audit_comment
+    </sql>
+</mapper>

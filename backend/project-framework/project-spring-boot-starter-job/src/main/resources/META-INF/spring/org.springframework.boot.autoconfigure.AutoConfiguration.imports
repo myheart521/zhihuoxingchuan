@@ -1,0 +1,2 @@
+com.example.project.framework.quartz.config.ProjectQuartzAutoConfiguration
+com.example.project.framework.quartz.config.ProjectAsyncAutoConfiguration

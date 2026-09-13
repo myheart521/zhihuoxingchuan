@@ -1,0 +1,139 @@
+管理员权限管理接口文档
+
+1. 获取管理员列表
+GET /api/admin/list
+请求参数：
+{
+  pageNum: number;       // 当前页码
+  pageSize: number;      // 每页条数
+  keyword?: string;      // 搜索关键词（用户名/真实姓名）
+  code?: string;         // 角色编码：blog_unexamine blog_examine blog_manage
+  status?: number;     // 状态：0-正常 1-禁用
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: {
+    total: number;      // 总记录数
+    list: Array<{
+      id: number;           // 用户ID
+      username: string;     // 用户名
+      email: string;        // 邮箱
+      code: string;  // 角色编码
+      status: number;       // 是否禁用
+      reputation: number;   // 信誉等级
+      blogCount: number;    // 已发布博客数量
+      likeCount: number;    // 博客总获赞数
+      realName: string;     // 真实姓名
+      idCardFront: string;  // 身份证正面
+      idCardBack: string;   // 身份证背面
+      auditStatus: number;  // 审核状态
+      auditComment: string; // 审核备注
+      createTime: string;   // 创建时间
+    }>;
+  };
+}
+
+2. 添加管理员
+POST /api/admin/add
+请求参数：
+{
+  username: string;     // 用户名
+  password: string;     // 密码
+  email: string;        // 邮箱
+  role: number;         // 角色（2-管理员）
+  realName: string;     // 真实姓名
+  idCardFront: string;  // 身份证正面
+  idCardBack: string;   // 身份证背面
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+3. 修改管理员
+PUT /api/admin/{id}
+请求参数：
+{
+  email?: string;       // 邮箱
+  role?: number;        // 角色
+  realName?: string;    // 真实姓名
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+4. 修改密码
+PUT /api/admin/{id}/password
+请求参数：
+{
+  newPassword: string;  // 新密码
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+5. 启用/禁用管理员
+PUT /api/admin/{id}/status
+请求参数：
+{
+  isLocked: number;     // 状态：0-正常 1-禁用
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+6. 审核管理员
+PUT /api/admin/{id}/audit
+请求参数：
+{
+  auditStatus: number;  // 审核状态：0-未审核 1-审核中 2-审核通过 3-拒绝
+  auditComment: string; // 审核备注
+}
+响应结果：
+{
+  code: number;
+  msg: string;
+}
+
+7. 获取角色列表
+GET /api/admin/roles
+响应结果：
+{
+  code: number;
+  msg: string;
+  data: Array<{
+    id: number;         // 角色ID
+    name: string;       // 角色名称
+    permissions: {      // 权限配置
+      blog: {           // 博客管理
+        view: boolean;  // 查看
+        edit: boolean;  // 编辑
+        delete: boolean;// 删除
+        audit: boolean; // 审核
+      };
+      user: {          // 用户管理
+        view: boolean;  // 查看
+        edit: boolean;  // 编辑
+        delete: boolean;// 删除
+      };
+      comment: {       // 评论管理
+        view: boolean;  // 查看
+        delete: boolean;// 删除
+      };
+      system: {        // 系统管理
+        view: boolean;  // 查看
+        edit: boolean;  // 编辑
+      };
+    };
+    createTime: string; // 创建时间
+  }>;
+} 

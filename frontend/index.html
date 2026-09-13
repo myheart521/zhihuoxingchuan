@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="keywords"
+      content="特别能战斗精神学习网站是为老师学生提供的学习交流特别能战斗精神相关的平台"
+    />
+    <meta
+      name="description"
+      content="特别能战斗精神学习网站是为老师学生提供的学习交流特别能战斗精神相关的平台"
+    />
+    <title>%VITE_APP_TITLE%</title>
+    <style>
+      /* 导入字体 */
+      @import url('https://example.invalid/resource');
+
+      /* 重置样式 */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background-color: #f0f2f5;
+        font-family: 'Noto Sans SC', sans-serif;
+        overflow: hidden;
+        color: #fff;
+      }
+
+      /* 加载容器 */
+      .app-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f2f5;
+        z-index: 9999;
+      }
+
+      /* 网格容器 */
+      .grid-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 1fr;
+        grid-gap: 1em;
+        z-index: 1;
+      }
+
+      /* 网格项目 */
+      .grid-item {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 0.8;
+        transition: opacity 0.5s ease;
+      }
+
+      /* 图片与颜色备用 */
+      .grid-item:nth-child(1) {
+        background-color: #c52121;
+        background-image: url('https://example.invalid/resource');
+        grid-column: 1 / span 1;
+        grid-row: 1 / 20;
+        clip-path: polygon(0 0, 80% 0, 100% 76.5%, 0 100%);
+        margin-bottom: -93px;
+      }
+
+      .grid-item:nth-child(2) {
+        background-color: #8c1515;
+        background-image: url('https://example.invalid/resource');
+        grid-column: 2 / span 1;
+        grid-row: 1 / 20;
+        clip-path: polygon(0 0, 100% 0, 75% 80%, 15.5% 100%);
+        margin-left: -21%;
+        margin-right: -5%;
+      }
+
+      .grid-item:nth-child(3) {
+        background-color: #a71d1d;
+        background-image: url('https://example.invalid/resource');
+        grid-column: 3 / span 1;
+        grid-row: 1 / 20;
+        clip-path: polygon(25% 0, 100% 0, 100% 100%, 0 53%);
+        margin-left: -28%;
+        margin-bottom: -150px;
+      }
+
+      .grid-item:nth-child(4) {
+        background-color: #e63946;
+        background-image: url('https://example.invalid/resource');
+        grid-column: 1 / span 1;
+        grid-row: 20 / 40;
+        clip-path: polygon(0 22.5%, 100% 0, 100% 77.5%, 0 100%);
+        margin-top: -5px;
+        margin-bottom: -93px;
+      }
+
+      .grid-item:nth-child(5) {
+        background-color: #b91c1c;
+        background-image: url('https://example.invalid/resource');
+        grid-column: 2 / span 1;
+        grid-row: 20 / 40;
+        clip-path: polygon(0 13%, 74% 0, 100% 9.25%, 100% 82%, 65% 100%, 0 82%);
+        margin-top: -67px;
+        margin-left: -1%;
+        margin-bottom: -86px;
+      }
+
+      .grid-item:nth-child(6) {
+        background-color: #991b1b;
+        background-image: url('https://example.invalid/resource');
+        grid-column: 3 / span 1;
+        grid-row: 20 / 40;
+        clip-path: polygon(0 0, 100% 34.5%, 100% 100%, 0 68.5%);
+        margin-left: -1%;
+        margin-top: -20px;
+        margin-bottom: -150px;
+      }
+
+      /* 黑色半透明遮罩 */
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+      }
+
+      /* 加载内容包装器 */
+      .app-loading-wrap {
+        position: relative;
+        z-index: 3;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 20px;
+        animation: fadeIn 1s ease forwards;
+      }
+
+      /* 标题样式 */
+      .app-loading-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .app-loading-logo {
+        width: 180px;
+        height: auto;
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+      }
+
+      .app-loading-title div {
+        font-size: 28px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        margin-top: 10px;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      }
+
+      /* 加载动画 */
+      .app-loading-item {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 60px;
+      }
+
+      .app-loading-outter {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 4px solid #fff;
+        border-bottom: 0;
+        border-left-color: transparent;
+        border-radius: 50%;
+        animation: loader-outter 1.5s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+      }
+
+      .app-loading-inner {
+        position: absolute;
+        top: calc(50% - 20px);
+        left: calc(50% - 20px);
+        width: 40px;
+        height: 40px;
+        border: 4px solid #e63946;
+        border-right: 0;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: loader-inner 1.5s cubic-bezier(0.42, 0.61, 0.58, 0.41) infinite;
+      }
+
+      /* 底部文字 */
+      .app-loading-text {
+        margin-top: 30px;
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+        animation: fadeInUp 1s ease 0.5s forwards;
+        opacity: 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      /* 知识词条卡片 */
+      .knowledge-card {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        width: 300px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(5px);
+        border-left: 4px solid #c52121;
+        z-index: 3;
+        animation: slideIn 1s ease 0.8s forwards;
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      .knowledge-title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .knowledge-title::before {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-color: #c52121;
+        margin-right: 8px;
+        border-radius: 50%;
+      }
+
+      .knowledge-content {
+        font-size: 14px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 15px;
+      }
+
+      .knowledge-source {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: right;
+        font-style: italic;
+      }
+
+      /* 动画关键帧 */
+      @keyframes loader-outter {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes loader-inner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+        50% {
+          transform: scale(1.05);
+          filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+        }
+        100% {
+          transform: scale(1);
+          filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* 响应式调整 */
+      @media (max-width: 768px) {
+        .app-loading-logo {
+          width: 140px;
+        }
+        
+        .app-loading-title div {
+          font-size: 22px;
+        }
+        
+        .knowledge-card {
+          position: relative;
+          bottom: auto;
+          right: auto;
+          width: 90%;
+          max-width: 350px;
+          margin-top: 40px;
+        }
+        
+        /* 调整网格在移动端的显示 */
+        .grid-container {
+          grid-gap: 0.5em;
+        }
+        
+        .grid-item {
+          opacity: 0.6; /* 降低背景透明度，提高前景内容可读性 */
+        }
+      }
+      
+      /* 小屏幕设备额外优化 */
+      @media (max-width: 480px) {
+        .app-loading-logo {
+          width: 100px;
+        }
+        
+        .app-loading-title div {
+          font-size: 18px;
+        }
+        
+        .app-loading-text {
+          font-size: 14px;
+        }
+        
+        .knowledge-card {
+          padding: 15px;
+        }
+        
+        .knowledge-title {
+          font-size: 14px;
+        }
+        
+        .knowledge-content {
+          font-size: 12px;
+        }
+      }
+      
+      /* 竖屏模式特别优化 */
+      @media (max-width: 768px) and (orientation: portrait) {
+        .grid-item:nth-child(1) {
+          clip-path: polygon(0 0, 90% 0, 100% 86.5%, 0 100%);
+        }
+        
+        .grid-item:nth-child(2) {
+          clip-path: polygon(0 0, 100% 0, 85% 90%, 15.5% 100%);
+        }
+        
+        .grid-item:nth-child(3) {
+          clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 63%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="app-loading">
+        <!-- 背景网格 -->
+        <div class="grid-container">
+          <div class="grid-item"></div>
+          <div class="grid-item"></div>
+          <div class="grid-item"></div>
+          <div class="grid-item"></div>
+          <div class="grid-item"></div>
+          <div class="grid-item"></div>
+        </div>
+        
+        <!-- 半透明遮罩 -->
+        <div class="overlay"></div>
+        
+        <div class="app-loading-wrap">
+          <div class="app-loading-title">
+            <img src="/logo.gif" class="app-loading-logo" alt="Logo" />
+            <div>%VITE_APP_TITLE%</div>
+          </div>
+          <div class="app-loading-item">
+            <div class="app-loading-outter"></div>
+            <div class="app-loading-inner"></div>
+          </div>
+          <div class="app-loading-text">特别能战斗精神 · 永远跟党走</div>
+          
+          <!-- 知识词条卡片 -->
+          <div class="knowledge-card">
+            <div class="knowledge-title">特别能战斗精神小知识</div>
+            <div class="knowledge-content">
+              "特别能战斗精神"是中国共产党人和革命军人在长期革命斗争中形成的优良传统，体现了坚定信念、不怕牺牲、英勇顽强的革命精神，是中国共产党人红色基因和精神谱系的重要组成部分。
+            </div>
+            <div class="knowledge-source">—— 来源：党史学习教育</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      // 知识词条轮播
+      const knowledgeItems = [
+        {
+          title: "特别能战斗精神小知识",
+          content: "特别能战斗精神是中国共产党人和革命军人在长期革命斗争中形成的优良传统，体现了坚定信念、不怕牺牲、英勇顽强的革命精神，是中国共产党人红色基因和精神谱系的重要组成部分。",
+          source: "党史学习教育"
+        },
+        {
+          title: "红色基因传承",
+          content: "传承红色基因，就是要传承中国共产党人的初心和使命，传承党的优良传统和作风，传承党的革命精神和奋斗精神，不断增强四个意识、坚定四个自信、做到两个维护。",
+          source: "习近平总书记讲话"
+        },
+        {
+          title: "革命精神的力量",
+          content: "革命精神是我们党的宝贵精神财富。我们党之所以历经百年而风华正茂、饱经磨难而生生不息，就是凭着那么一股革命加拼命的强大精神。",
+          source: "党的十九大报告"
+        }
+      ];
+      
+      // 页面加载完成后执行
+      window.addEventListener('DOMContentLoaded', () => {
+        const knowledgeTitle = document.querySelector('.knowledge-title');
+        const knowledgeContent = document.querySelector('.knowledge-content');
+        const knowledgeSource = document.querySelector('.knowledge-source');
+        const appLoading = document.querySelector('.app-loading');
+        let currentIndex = 0;
+        let startTime = Date.now();
+        let minDisplayTime = 3000; // 最少显示3秒
+        
+        // 每5秒更换一次知识词条
+        const knowledgeInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % knowledgeItems.length;
+          
+          // 添加淡出动画
+          const card = document.querySelector('.knowledge-card');
+          card.style.opacity = '0';
+          
+          // 等待淡出动画完成后更新内容
+          setTimeout(() => {
+            knowledgeTitle.textContent = knowledgeItems[currentIndex].title;
+            knowledgeContent.textContent = knowledgeItems[currentIndex].content;
+            knowledgeSource.textContent = `—— 来源：${knowledgeItems[currentIndex].source}`;
+            
+            // 添加淡入动画
+            card.style.opacity = '1';
+          }, 500);
+        }, 5000);
+        
+        // 监听主应用加载完成事件
+        window.addEventListener('load', () => {
+          const elapsedTime = Date.now() - startTime;
+          const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+          
+          // 确保至少显示3秒
+          setTimeout(() => {
+            // 添加淡出动画样式
+            appLoading.style.transition = 'opacity 1s ease-out';
+            appLoading.style.opacity = '0';
+            
+            // 动画完成后隐藏加载页面
+            setTimeout(() => {
+              appLoading.style.display = 'none';
+              // 清除知识词条轮播定时器
+              clearInterval(knowledgeInterval);
+            }, 1000);
+          }, remainingTime);
+        });
+      });
+    </script>
+  </body>
+</html>

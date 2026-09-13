@@ -1,0 +1,114 @@
+博客详情接口文档
+
+1. 获取博客详情
+GET /api/blog/detail/{id}
+
+请求参数：
+- id: number (路径参数) - 博客ID
+
+响应结果：
+{
+  code: number;       // 响应码：0-成功
+  msg: string;        // 响应信息
+  data: {
+    id: number;       // 博客ID
+    userId: number;   // 作者ID
+    title: string;    // 标题
+    content: string;  // 内容（HTML格式）
+    status: number;   // 状态：0-草稿 1-待审核 2-已发布 3-下架
+    isTop: number;    // 是否置顶：0-否 1-是
+    topTime: string;  // 置顶时间
+    visibility: number; // 可见性：0-公开 1-仅自己 2-粉丝可见
+    viewCount: number;  // 阅读量
+    likeCount: number;  // 点赞数
+    auditUserId: number; // 审核人ID
+    auditTime: string;   // 审核时间
+    auditComment: string; // 审核意见
+    createTime: string;   // 创建时间
+    updateTime: string;   // 更新时间
+    author: {            // 作者信息
+      id: number;        // 用户ID
+      username: string;  // 用户名
+      role: number;      // 角色：0-未审核 1-普通用户 2-管理员
+      reputation: number; // 信誉等级
+      blogCount: number; // 博客数量
+      likeCount: number; // 获赞数
+    };
+    category: {         // 分类信息
+      id: number;       // 分类ID
+      name: string;     // 分类名称
+      parentId: number; // 父分类ID
+    };
+    tags: Array<{      // 标签列表
+      id: number;      // 标签ID
+      name: string;    // 标签名称
+    }>;
+  }
+}
+
+错误码：
+- 404: 博客不存在
+- 403: 无权限查看
+
+2. 获取评论列表
+GET /api/blog/comment/list/{postId}
+
+请求参数：
+- postId: number (路径参数) - 博客ID
+
+响应结果：
+{
+  code: number;       // 响应码：0-成功
+  msg: string;        // 响应信息
+  data: {
+    total: number;    // 评论总数
+    list: Array<{
+      id: number;           // 评论ID
+      postId: number;       // 博客ID
+      userId: number;       // 评论者ID
+      username: string;     // 评论者用户名
+      avatar: string;       // 评论者头像
+      content: string;      // 评论内容
+      parentId: number;     // 父评论ID（0表示一级评论）
+      replyToUsername?: string; // 回复的用户名（二级评论才有）
+      createTime: string;   // 评论时间
+      children?: Array<{    // 二级评论列表
+        id: number;
+        postId: number;
+        userId: number;
+        username: string;
+        avatar: string;
+        content: string;
+        parentId: number;
+        replyToUsername: string;
+        createTime: string;
+      }>;
+    }>;
+  }
+}
+
+3. 发表评论
+POST /api/blog/comment/create
+
+请求参数：
+{
+  postId: number;     // 博客ID
+  content: string;    // 评论内容
+  parentId: number;   // 父评论ID（0表示一级评论）
+  replyToId?: number; // 回复的评论ID（二级评论才需要）
+}
+
+响应结果：
+{
+  code: number;    // 响应码：0-成功
+  msg: string;     // 响应信息
+  data: {
+    id: number;    // 新创建的评论ID
+  }
+}
+
+错误码：
+- 401: 未登录
+- 403: 无评论权限
+- 404: 博客不存在
+- 400: 参数错误 
